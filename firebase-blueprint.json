@@ -1,0 +1,50 @@
+{
+  "entities": {
+    "users": {
+      "title": "Users",
+      "description": "User profiles for SEKANAK application (children, adults, researchers)",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "age": { "type": "number" },
+        "gender": { "type": "string" },
+        "userType": { "type": "string" },
+        "schoolName": { "type": "string" },
+        "gradeClass": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "name", "userType"]
+    },
+    "food_logs": {
+      "title": "Food Logs",
+      "description": "Daily food and drink logs with GGL content",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "date": { "type": "string" },
+        "mealType": { "type": "string" },
+        "foodName": { "type": "string" },
+        "sugarGram": { "type": "number" },
+        "saltGram": { "type": "number" },
+        "fatGram": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "date", "foodName"]
+    },
+    "daily_summaries": {
+      "title": "Daily Summaries",
+      "description": "Aggregated daily nutritional status and AI feedback",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "date": { "type": "string" },
+        "totalSugar": { "type": "number" },
+        "totalSalt": { "type": "number" },
+        "totalFat": { "type": "number" },
+        "status": { "type": "string" }
+      },
+      "required": ["userId", "date"]
+    }
+  }
+}

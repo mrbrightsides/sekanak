@@ -1,0 +1,6 @@
+{
+  "name": "Aplikasi SEKANAK - GGL AI Sriwijaya",
+  "description": "Sistem Edukasi Kesehatan Anak dan Keluarga dengan Analisis AI Gemini untuk Konsumsi Gula, Garam, dan Lemak (GGL) berstandar Kemenkes & WHO.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
