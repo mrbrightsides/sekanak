@@ -246,7 +246,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-200 pb-20">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-200 pb-20">
       
       {/* Top Header Navbar with UNSRI Logo */}
       <Navbar
@@ -260,24 +260,24 @@ export default function App() {
       />
 
       {/* Quick Demo Role Switcher Bar */}
-      <div className="bg-emerald-900 text-white py-2 px-3 shadow-inner border-b border-emerald-800">
+      <div className="bg-emerald-900 text-white py-2 px-2.5 shadow-inner border-b border-emerald-800 w-full max-w-full overflow-x-hidden">
         <div className="max-w-md md:max-w-2xl mx-auto flex items-center justify-between text-xs gap-1.5 flex-wrap">
-          <div className="flex items-center gap-1 font-bold text-[11px] text-emerald-200">
+          <div className="flex items-center gap-1 font-bold text-[10px] sm:text-[11px] text-emerald-200 shrink-0">
             <span className="text-amber-300">⚡</span>
             <span>Demo Akun Role:</span>
           </div>
-          <div className="flex gap-1 flex-wrap">
+          <div className="flex gap-1 flex-wrap text-[10px]">
             <button
               onClick={() => handleQuickLogin('anak')}
-              className={`px-2 py-0.5 rounded-lg text-[10px] font-bold transition ${
+              className={`px-1.5 py-0.5 rounded-lg text-[9px] sm:text-[10px] font-bold transition-all duration-150 active:scale-95 ${
                 userProfile?.userType === 'anak' ? 'bg-amber-400 text-slate-950 shadow-xs' : 'bg-emerald-800 hover:bg-emerald-700 text-emerald-100'
               }`}
             >
-              👦 Siswa SD
+              👦 Siswa
             </button>
             <button
               onClick={() => handleQuickLogin('orang_tua')}
-              className={`px-2 py-0.5 rounded-lg text-[10px] font-bold transition ${
+              className={`px-1.5 py-0.5 rounded-lg text-[9px] sm:text-[10px] font-bold transition-all duration-150 active:scale-95 ${
                 userProfile?.userType === 'orang_tua' ? 'bg-amber-400 text-slate-950 shadow-xs' : 'bg-emerald-800 hover:bg-emerald-700 text-emerald-100'
               }`}
             >
@@ -285,26 +285,26 @@ export default function App() {
             </button>
             <button
               onClick={() => handleQuickLogin('guru')}
-              className={`px-2 py-0.5 rounded-lg text-[10px] font-bold transition ${
+              className={`px-1.5 py-0.5 rounded-lg text-[9px] sm:text-[10px] font-bold transition-all duration-150 active:scale-95 ${
                 userProfile?.userType === 'guru' ? 'bg-amber-400 text-slate-950 shadow-xs' : 'bg-emerald-800 hover:bg-emerald-700 text-emerald-100'
               }`}
             >
-              🏫 Guru SD
+              🏫 Guru
             </button>
             <button
               onClick={() => handleQuickLogin('peneliti')}
-              className={`px-2 py-0.5 rounded-lg text-[10px] font-bold transition ${
+              className={`px-1.5 py-0.5 rounded-lg text-[9px] sm:text-[10px] font-bold transition-all duration-150 active:scale-95 ${
                 userProfile?.userType === 'peneliti' ? 'bg-amber-400 text-slate-950 shadow-xs' : 'bg-emerald-800 hover:bg-emerald-700 text-emerald-100'
               }`}
             >
-              🔬 Peneliti UNSRI
+              🔬 Peneliti
             </button>
           </div>
         </div>
       </div>
 
       {/* Main Container */}
-      <main className="max-w-md md:max-w-2xl mx-auto px-4 py-4 space-y-5">
+      <main className="max-w-md md:max-w-2xl mx-auto px-3 sm:px-4 py-4 space-y-5 w-full max-w-full overflow-x-hidden">
 
         
         {/* TAB 1: BERANDA */}

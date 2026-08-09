@@ -255,7 +255,7 @@ export const FoodInput: React.FC<FoodInputProps> = ({ onAddFood, userId }) => {
                   setSelectedCategory(cat);
                   setShowAutocompleteDropdown(true);
                 }}
-                className={`px-2.5 py-1 rounded-lg font-bold shrink-0 transition ${
+                className={`px-2.5 py-1 rounded-lg font-bold shrink-0 transition-all duration-150 active:scale-95 ${
                   selectedCategory === cat
                     ? 'bg-emerald-600 text-white shadow-xs'
                     : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
@@ -276,7 +276,7 @@ export const FoodInput: React.FC<FoodInputProps> = ({ onAddFood, userId }) => {
                 key={item.id}
                 type="button"
                 onClick={() => handleSelectLocalFood(item)}
-                className={`p-2.5 rounded-xl text-left border transition flex items-start gap-2.5 ${
+                className={`p-2.5 rounded-xl text-left border transition-all duration-150 active:scale-[0.97] flex items-start gap-2.5 ${
                   isSelected
                     ? 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-500 text-emerald-900 dark:text-emerald-200 ring-2 ring-emerald-400/50'
                     : 'bg-slate-50 dark:bg-slate-900/80 border-slate-200 dark:border-slate-700 hover:border-emerald-400 text-slate-800 dark:text-slate-200'
