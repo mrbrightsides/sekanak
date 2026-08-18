@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { APP_LOGOS } from '../constants/logos';
+import { APP_LOGOS } from '../types';
 
 interface UnsriLogoProps {
   className?: string;

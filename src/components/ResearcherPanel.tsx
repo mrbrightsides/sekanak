@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { UserProfile, FoodItem } from '../types';
-import { APP_LOGOS } from '../constants/logos';
+import { UserProfile, FoodItem, APP_LOGOS } from '../types';
 import { 
   Microscope, Download, Database, Users, School, CheckCircle2, FileSpreadsheet, 
   ShieldAlert, MapPin, Sparkles, Activity, Heart, Flame, Award, Calendar, Layers, CheckCircle

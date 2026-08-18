@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { UserProfile } from '../types';
+import { UserProfile, APP_LOGOS } from '../types';
 import { UnsriLogo } from './UnsriLogo';
-import { APP_LOGOS } from '../constants/logos';
 import { Sun, Moon, User, Zap, LogOut, HeartHandshake } from 'lucide-react';
 
 interface NavbarProps {

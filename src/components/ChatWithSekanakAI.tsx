@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { UserProfile } from '../types';
-import { APP_LOGOS } from '../constants/logos';
+import { UserProfile, APP_LOGOS } from '../types';
 import { Bot, Send, Sparkles, User, Loader2, RefreshCw, HelpCircle, ShieldCheck, HeartPulse } from 'lucide-react';
 
 interface ChatMessage {

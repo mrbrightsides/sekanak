@@ -91,3 +91,8 @@ export interface ResearchLog {
   tamCategory: 'Perceived Usefulness' | 'Perceived Ease of Use' | 'Attitude Toward Using' | 'System Usage';
   timestamp: string;
 }
+
+export const APP_LOGOS = {
+  sekanak: 'https://i.imgur.com/KcQRTiO.png',
+  unsri: 'https://i.imgur.com/OuoFtOD.png',
+} as const;

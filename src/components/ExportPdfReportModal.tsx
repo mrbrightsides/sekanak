@@ -1,6 +1,5 @@
 import React from 'react';
-import { FoodItem, UserProfile } from '../types';
-import { APP_LOGOS } from '../constants/logos';
+import { FoodItem, UserProfile, APP_LOGOS } from '../types';
 import { Printer, Download, X, CheckCircle2, AlertTriangle, ShieldCheck, FileText, Sparkles } from 'lucide-react';
 
 interface ExportPdfReportModalProps {

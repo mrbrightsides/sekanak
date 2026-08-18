@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { UserProfile, UserType, Gender } from '../types';
+import { UserProfile, UserType, Gender, APP_LOGOS } from '../types';
 import { UnsriLogo } from './UnsriLogo';
-import { APP_LOGOS } from '../constants/logos';
 import { Zap, User, School, Heart, CheckCircle2, X, Sparkles, ShieldCheck } from 'lucide-react';
 
 interface AuthModalProps {
