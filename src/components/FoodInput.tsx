@@ -2,8 +2,9 @@ import React, { useState, useMemo } from 'react';
 import { MealType, PresetFood, FoodItem } from '../types';
 import { PRESET_FOODS } from '../data/presetFoods';
 import { PALEMBANG_LOCAL_FOODS, LocalFoodItem, searchLocalFoods } from '../data/localFoodData';
-import { Sparkles, Plus, Loader2, Check, SlidersHorizontal, Info, Camera, Search, MapPin, ChevronDown } from 'lucide-react';
+import { Sparkles, Plus, Loader2, Check, SlidersHorizontal, Info, Camera, Search, MapPin, ChevronDown, Image as ImageIcon, X, Flame } from 'lucide-react';
 import { SmartLabelScanner } from './SmartLabelScanner';
+import { FoodCameraModal } from './FoodCameraModal';
 
 interface FoodInputProps {
   onAddFood: (food: Omit<FoodItem, 'id' | 'createdAt'>) => void;
@@ -18,10 +19,12 @@ export const FoodInput: React.FC<FoodInputProps> = ({ onAddFood, userId }) => {
   const [saltGram, setSaltGram] = useState<number>(0);
   const [fatGram, setFatGram] = useState<number>(0);
   const [aiNote, setAiNote] = useState<string>('');
+  const [photoThumbnail, setPhotoThumbnail] = useState<string | null>(null);
   
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [showManualSliders, setShowManualSliders] = useState(false);
   const [showSmartScanner, setShowSmartScanner] = useState(false);
+  const [showFoodCamera, setShowFoodCamera] = useState(false);
   const [selectedPreset, setSelectedPreset] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState('');
 
@@ -126,6 +129,7 @@ export const FoodInput: React.FC<FoodInputProps> = ({ onAddFood, userId }) => {
     setSaltGram(0);
     setFatGram(0);
     setAiNote('');
+    setPhotoThumbnail(null);
     setSelectedPreset(null);
 
     setSuccessMessage('Makanan berhasil dicatat!');
@@ -135,26 +139,57 @@ export const FoodInput: React.FC<FoodInputProps> = ({ onAddFood, userId }) => {
   return (
     <div className="space-y-5">
       {/* Top Banner */}
-      <div className="p-4 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 text-white shadow-md flex items-center justify-between flex-wrap gap-2">
+      <div className="p-4 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 text-white shadow-md flex items-center justify-between flex-wrap gap-3">
         <div>
           <h2 className="text-base font-black flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-amber-300" />
             <span>Input Makanan & Analisis AI Gemini</span>
           </h2>
           <p className="text-xs text-emerald-100 mt-1 leading-relaxed">
-            Pilih dari jajanan populer anak, ketik nama makanan, atau gunakan Kamera Smart Scanner untuk membaca Informasi Nilai Gizi kemasan.
+            Ambil foto makanan dengan Kamera AI, pilih dari menu khas Sumsel, atau scan label Informasi Nilai Gizi kemasan.
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setShowSmartScanner(!showSmartScanner)}
-          className="py-2 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs flex items-center gap-1.5 shadow-sm transition active:scale-95 shrink-0"
-        >
-          <Camera className="w-4 h-4 text-slate-950" />
-          <span>{showSmartScanner ? 'Tutup Scanner' : '📷 Smart Label Scanner'}</span>
-        </button>
+        {/* Top Action Buttons: Camera AI & Smart Label Scanner */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <button
+            type="button"
+            onClick={() => setShowFoodCamera(true)}
+            className="py-2 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs flex items-center gap-1.5 shadow-sm transition active:scale-95 shrink-0"
+          >
+            <Camera className="w-4 h-4 text-slate-950" />
+            <span>📷 Foto Kamera AI</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setShowSmartScanner(!showSmartScanner)}
+            className="py-2 px-3 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs flex items-center gap-1.5 backdrop-blur-xs transition active:scale-95 shrink-0"
+          >
+            <ImageIcon className="w-4 h-4 text-emerald-200" />
+            <span>{showSmartScanner ? 'Tutup Scanner' : '🏷️ Scan Label Gizi'}</span>
+          </button>
+        </div>
       </div>
+
+      {/* FOOD CAMERA MODAL COMPONENT */}
+      <FoodCameraModal
+        isOpen={showFoodCamera}
+        onClose={() => setShowFoodCamera(false)}
+        onApplyEstimates={(estimates) => {
+          setFoodName(estimates.foodName);
+          setPortion(estimates.portion || '1 porsi sedang');
+          setSugarGram(estimates.sugarGram);
+          setSaltGram(estimates.saltGram);
+          setFatGram(estimates.fatGram);
+          setAiNote(estimates.aiNote);
+          if (estimates.photoPreview) {
+            setPhotoThumbnail(estimates.photoPreview);
+          }
+          setSuccessMessage(`Foto "${estimates.foodName}" berhasil dianalisis & dimasukkan ke formulir input!`);
+          setTimeout(() => setSuccessMessage(''), 4000);
+        }}
+      />
 
       {/* SMART LABEL SCANNER COMPONENT */}
       {showSmartScanner && (
@@ -342,10 +377,67 @@ export const FoodInput: React.FC<FoodInputProps> = ({ onAddFood, userId }) => {
 
       {/* Custom Input Form */}
       <form onSubmit={handleSubmit} className="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-3.5 shadow-xs">
+        {/* Photo Thumbnail Banner if captured */}
+        {photoThumbnail && (
+          <div className="p-2.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-700 flex items-center justify-between gap-3 animate-fadeIn">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="relative w-12 h-12 rounded-xl overflow-hidden border border-emerald-400 shrink-0 shadow-xs">
+                <img
+                  src={photoThumbnail}
+                  alt="Thumbnail Makanan"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-600 text-white font-bold">
+                    📸 Foto Kamera AI
+                  </span>
+                </div>
+                <div className="text-xs font-bold text-slate-800 dark:text-slate-100 truncate mt-0.5">
+                  {foodName || 'Makanan Terfoto'}
+                </div>
+                <div className="text-[10px] text-emerald-700 dark:text-emerald-300">
+                  Estimasi nilai GGL telah otomatis terisi
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1.5 shrink-0">
+              <button
+                type="button"
+                onClick={() => setShowFoodCamera(true)}
+                className="px-2.5 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-[11px] font-bold hover:bg-slate-100 transition active:scale-95 flex items-center gap-1"
+              >
+                <Camera className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Foto Ulang</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setPhotoThumbnail(null)}
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 transition"
+                title="Hapus foto"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        )}
+
         <div className="relative">
-          <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1">
-            Nama Makanan / Minuman:
-          </label>
+          <div className="flex items-center justify-between mb-1">
+            <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+              Nama Makanan / Minuman:
+            </label>
+            <button
+              type="button"
+              onClick={() => setShowFoodCamera(true)}
+              className="text-[11px] text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 font-bold flex items-center gap-1 transition active:scale-95"
+            >
+              <Camera className="w-3.5 h-3.5 text-amber-500" />
+              <span>Foto Makanan (Kamera AI)</span>
+            </button>
+          </div>
           <div className="flex gap-2">
             <input
               type="text"
@@ -362,10 +454,19 @@ export const FoodInput: React.FC<FoodInputProps> = ({ onAddFood, userId }) => {
             />
             <button
               type="button"
+              onClick={() => setShowFoodCamera(true)}
+              className="p-2.5 rounded-xl bg-amber-100 dark:bg-amber-950/60 hover:bg-amber-200 border border-amber-300 dark:border-amber-700 text-amber-900 dark:text-amber-200 font-bold text-xs flex items-center gap-1 transition active:scale-95 shrink-0"
+              title="Ambil foto makanan dengan kamera"
+            >
+              <Camera className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+              <span className="hidden sm:inline text-[11px]">Kamera</span>
+            </button>
+            <button
+              type="button"
               onClick={handleAnalyzeWithAI}
               disabled={isAnalyzing || !foodName.trim()}
               className="px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs disabled:opacity-50 transition active:scale-95 shrink-0"
-              title="Analisis kandungan GGL dengan AI Gemini"
+              title="Analisis teks kandungan GGL dengan AI Gemini"
             >
               {isAnalyzing ? (
                 <Loader2 className="w-4 h-4 animate-spin text-amber-300" />
