@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { UserProfile } from '../types';
+import { APP_LOGOS } from '../constants/logos';
 import { Bot, Send, Sparkles, User, Loader2, RefreshCw, HelpCircle, ShieldCheck, HeartPulse } from 'lucide-react';
 
 interface ChatMessage {
@@ -97,10 +98,15 @@ export const ChatWithSekanakAI: React.FC<ChatWithSekanakAIProps> = ({ user }) =>
       <div className="p-3.5 bg-gradient-to-r from-emerald-700 via-teal-700 to-cyan-800 text-white flex items-center justify-between shrink-0">
         <div className="flex items-center gap-2.5">
           <div className="relative">
-            <div className="w-9 h-9 rounded-full bg-white/20 text-white flex items-center justify-center font-bold text-lg ring-2 ring-emerald-300">
-              🤖
+            <div className="w-9 h-9 rounded-xl bg-white p-1 flex items-center justify-center ring-2 ring-emerald-300 overflow-hidden shadow-xs">
+              <img
+                src={APP_LOGOS.sekanak}
+                alt="Logo SEKANAK"
+                className="w-full h-full object-contain"
+                referrerPolicy="no-referrer"
+              />
             </div>
-            <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-emerald-800"></span>
+            <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-emerald-800"></span>
           </div>
           <div>
             <h3 className="text-xs font-black flex items-center gap-1.5">
@@ -145,16 +151,21 @@ export const ChatWithSekanakAI: React.FC<ChatWithSekanakAIProps> = ({ user }) =>
           >
             {/* Avatar */}
             <div
-              className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 shadow-xs ${
+              className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 shadow-xs overflow-hidden ${
                 msg.sender === 'user'
                   ? 'bg-emerald-600 text-white'
-                  : 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
+                  : 'bg-white dark:bg-slate-800 p-0.5 border border-emerald-300 dark:border-emerald-700'
               }`}
             >
               {msg.sender === 'user' ? (
                 <User className="w-4 h-4" />
               ) : (
-                <Sparkles className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <img
+                  src={APP_LOGOS.sekanak}
+                  alt="SEKANAK AI"
+                  className="w-full h-full object-contain"
+                  referrerPolicy="no-referrer"
+                />
               )}
             </div>
 

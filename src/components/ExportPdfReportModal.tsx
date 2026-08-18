@@ -1,5 +1,6 @@
 import React from 'react';
 import { FoodItem, UserProfile } from '../types';
+import { APP_LOGOS } from '../constants/logos';
 import { Printer, Download, X, CheckCircle2, AlertTriangle, ShieldCheck, FileText, Sparkles } from 'lucide-react';
 
 interface ExportPdfReportModalProps {
@@ -102,22 +103,38 @@ export const ExportPdfReportModal: React.FC<ExportPdfReportModalProps> = ({
         <div className="space-y-5 font-sans print:text-black">
           
           {/* Header Branding Kop Surat */}
-          <div className="border-b-2 border-emerald-800 pb-3 flex items-center justify-between gap-4">
-            <div className="space-y-1">
-              <div className="text-[10px] font-black uppercase tracking-widest text-emerald-800">
-                UNIVERSITAS SRIWIJAYA (UNSRI) • FAKULTAS KESEHATAN MASYARAKAT
+          <div className="border-b-2 border-emerald-800 pb-3 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <img
+                src={APP_LOGOS.sekanak}
+                alt="Logo SEKANAK"
+                className="w-12 h-12 sm:w-14 sm:h-14 object-contain shrink-0"
+                referrerPolicy="no-referrer"
+              />
+              <div className="space-y-0.5">
+                <div className="text-[10px] font-black uppercase tracking-wider text-emerald-800">
+                  UNIVERSITAS SRIWIJAYA (UNSRI) • FAKULTAS KESEHATAN MASYARAKAT
+                </div>
+                <h1 className="text-base sm:text-lg font-black text-slate-900 uppercase tracking-tight">
+                  RAPOR PEMANTAUAN NUTRISI GGL SISWA (SEKANAK)
+                </h1>
+                <p className="text-[11px] text-slate-600">
+                  Sistem Edukasi Kesehatan Anak & Keluarga • Pengawasan Gula, Garam, dan Lemak
+                </p>
               </div>
-              <h1 className="text-lg sm:text-xl font-black text-slate-900 uppercase tracking-tight">
-                RAPOR PEMANTAUAN NUTRISI GGL SISWA (SEKANAK)
-              </h1>
-              <p className="text-xs text-slate-600">
-                Sistem Edukasi Kesehatan Anak & Keluarga • Program Pengawasan Gula, Garam, dan Lemak
-              </p>
             </div>
-            <div className="text-right text-[10px] text-slate-500 hidden sm:block">
-              <div className="font-bold text-slate-800">Standar Acuan:</div>
-              <div>Kemenkes RI Permenkes No. 30/2013</div>
-              <div>G4 - G1 - L5 (Edukasi Sekolah)</div>
+            <div className="flex items-center gap-2.5 shrink-0">
+              <img
+                src={APP_LOGOS.unsri}
+                alt="Logo UNSRI"
+                className="w-12 h-12 sm:w-14 sm:h-14 object-contain shrink-0"
+                referrerPolicy="no-referrer"
+              />
+              <div className="text-right text-[9px] text-slate-500 hidden sm:block">
+                <div className="font-bold text-slate-800">Standar Acuan:</div>
+                <div>Kemenkes RI No. 30/2013</div>
+                <div>G4 - G1 - L5 Edukasi</div>
+              </div>
             </div>
           </div>
 

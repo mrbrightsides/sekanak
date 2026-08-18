@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { UserProfile, UserType, Gender } from '../types';
 import { UnsriLogo } from './UnsriLogo';
+import { APP_LOGOS } from '../constants/logos';
 import { Zap, User, School, Heart, CheckCircle2, X, Sparkles, ShieldCheck } from 'lucide-react';
 
 interface AuthModalProps {
@@ -53,8 +54,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         {/* Header */}
         <div className="p-4 bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 text-white flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-white/20 backdrop-blur-xs">
-              <User className="w-5 h-5 text-white" />
+            <div className="w-9 h-9 rounded-xl bg-white p-1 shadow-xs shrink-0 flex items-center justify-center">
+              <img
+                src={APP_LOGOS.sekanak}
+                alt="Logo SEKANAK"
+                className="w-full h-full object-contain"
+                referrerPolicy="no-referrer"
+              />
             </div>
             <div>
               <h2 className="text-base font-black">Identitas Pengguna SEKANAK</h2>

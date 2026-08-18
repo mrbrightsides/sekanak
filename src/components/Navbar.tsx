@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { UserProfile } from '../types';
 import { UnsriLogo } from './UnsriLogo';
+import { APP_LOGOS } from '../constants/logos';
 import { Sun, Moon, User, Zap, LogOut, HeartHandshake } from 'lucide-react';
 
 interface NavbarProps {
@@ -22,14 +23,28 @@ export const Navbar: React.FC<NavbarProps> = ({
   onLogout,
   onSelectPenelitiTab,
 }) => {
+  const [logoError, setLogoError] = useState(false);
+
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-white/95 dark:bg-slate-900/95 border-b border-emerald-100 dark:border-slate-800 transition-colors shadow-xs w-full max-w-full overflow-hidden">
       <div className="max-w-md md:max-w-4xl mx-auto px-2.5 sm:px-4 py-2 flex items-center justify-between gap-1.5 min-w-0">
         
         {/* Left: App Identity */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 min-w-0 shrink">
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center font-black text-base sm:text-xl shadow-md shadow-emerald-500/20 shrink-0">
-            S
+        <div className="flex items-center gap-2 sm:gap-2.5 min-w-0 shrink">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-white dark:bg-slate-800 border border-emerald-200 dark:border-slate-700 flex items-center justify-center p-1 shadow-md shadow-emerald-500/10 shrink-0 overflow-hidden">
+            {!logoError ? (
+              <img
+                src={APP_LOGOS.sekanak}
+                alt="Logo SEKANAK"
+                className="w-full h-full object-contain"
+                referrerPolicy="no-referrer"
+                onError={() => setLogoError(true)}
+              />
+            ) : (
+              <div className="w-full h-full rounded-lg bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center font-black text-sm">
+                S
+              </div>
+            )}
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-1">

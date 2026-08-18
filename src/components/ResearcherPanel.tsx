@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { UserProfile, FoodItem } from '../types';
+import { APP_LOGOS } from '../constants/logos';
 import { 
   Microscope, Download, Database, Users, School, CheckCircle2, FileSpreadsheet, 
   ShieldAlert, MapPin, Sparkles, Activity, Heart, Flame, Award, Calendar, Layers, CheckCircle
@@ -104,17 +105,32 @@ export const ResearcherPanel: React.FC<ResearcherPanelProps> = ({ logs, user }) 
     <div className="space-y-5">
       {/* Header */}
       <div className="p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-900 text-white shadow-md">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Microscope className="w-5 h-5 text-amber-400" />
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1.5 p-1 bg-white/10 backdrop-blur-xs rounded-xl border border-white/10 shrink-0">
+              <img
+                src={APP_LOGOS.sekanak}
+                alt="Logo SEKANAK"
+                className="w-8 h-8 object-contain"
+                referrerPolicy="no-referrer"
+              />
+              <img
+                src={APP_LOGOS.unsri}
+                alt="Logo UNSRI"
+                className="w-8 h-8 object-contain"
+                referrerPolicy="no-referrer"
+              />
+            </div>
             <div>
-              <h2 className="text-base font-black">Panel Peneliti UNSRI & Admin Studi</h2>
+              <h2 className="text-sm sm:text-base font-black flex items-center gap-1.5">
+                <span>Panel Peneliti UNSRI & Admin Studi</span>
+              </h2>
               <p className="text-[10px] text-slate-300">
                 Sistem Edukasi Kesehatan Anak & Keluarga • Riset AI GGL (2024-2028)
               </p>
             </div>
           </div>
-          <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-400 text-slate-950 uppercase tracking-wide">
+          <span className="text-[9px] sm:text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-400 text-slate-950 uppercase tracking-wide shrink-0">
             FKM UNSRI 2026
           </span>
         </div>
